@@ -1,3 +1,6 @@
+Email to start playing : test@test.test
+pass : test
+
 # React Globe Project
 
 A React application featuring an interactive 3D globe with chatbot integration and Google Maps functionality.
