@@ -93,6 +93,56 @@ This project uses environment variables to store sensitive information like API 
 Required environment variables:
 - `VITE_GEMINI_API_KEY` - Your Gemini API key for the chatbot functionality
 
+## Deployment to GitHub Pages
+
+This project is configured for automatic deployment to GitHub Pages.
+
+### Automatic Deployment (Recommended)
+
+The project uses GitHub Actions to automatically deploy when you push to the `main` branch.
+
+**Setup Steps:**
+
+1. **Add your API key as a GitHub Secret:**
+   - Go to your repository on GitHub
+   - Navigate to **Settings** → **Secrets and variables** → **Actions**
+   - Click **New repository secret**
+   - Name: `VITE_GEMINI_API_KEY`
+   - Value: Your actual Gemini API key
+   - Click **Add secret**
+
+2. **Enable GitHub Pages:**
+   - Go to **Settings** → **Pages**
+   - Under **Source**, select **GitHub Actions**
+   - Save the settings
+
+3. **Push your changes:**
+   ```bash
+   git add .
+   git commit -m "Configure GitHub Pages deployment"
+   git push
+   ```
+
+4. **Wait for deployment:**
+   - Go to the **Actions** tab in your repository
+   - Watch the deployment workflow run
+   - Once complete, your site will be live at: `https://medsadakdhieb.github.io/Heat-Hail/`
+
+### Manual Deployment
+
+Alternatively, you can deploy manually:
+
+```bash
+npm run deploy
+```
+
+This will build your project and push it to the `gh-pages` branch.
+
+### Live Site
+
+Once deployed, your application will be available at:
+**https://medsadakdhieb.github.io/Heat-Hail/**
+
 ## Contributing
 
 1. Fork the repository
