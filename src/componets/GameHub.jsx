@@ -31,7 +31,7 @@ const pickRandomCountry = (list, forbiddenName) => {
   return filtered[Math.floor(Math.random() * filtered.length)]
 }
 
-function GameHub({ user, onLeave }) {
+function GameHub({ user, onLeave, onChangeGame }) {
   const countryIndex = useMemo(
     () => countries.map((country) => ({ ...country, key: country.name.toLowerCase() })),
     [],
@@ -133,6 +133,22 @@ function GameHub({ user, onLeave }) {
     setSuggestions([])
   }
 
+  const handleSurrender = () => {
+    setFeedback({ type: 'error', message: `💀 You surrendered! The answer was ${target.name}` })
+    setStats((prev) => ({
+      ...prev,
+      streak: 0,
+    }))
+    setSuggestions([])
+    setGuess('')
+
+
+    setTimeout(() => {
+      setTarget(pickRandomCountry(countryIndex, target.name))
+      setFeedback(null)
+    }, 3000)
+  }
+
   return (
     <>
       <div className="game-layout">
@@ -143,9 +159,14 @@ function GameHub({ user, onLeave }) {
               <h2>{user.username}</h2>
               <p className="game-subline">{user.email}</p>
             </div>
-            <button className="cta ghost" onClick={onLeave}>
-              Return to landing
-            </button>
+            <div className="header-buttons">
+              <button className="cta ghost" onClick={onChangeGame}>
+                Change game
+              </button>
+              <button className="cta ghost" onClick={onLeave}>
+                Return to landing
+              </button>
+            </div>
           </header>
 
           <div className="target-hints">
@@ -180,6 +201,9 @@ function GameHub({ user, onLeave }) {
               </div>
               <button type="submit" className="cta primary">
                 Send guess
+              </button>
+              <button type="button" className="cta ghost" onClick={handleSurrender}>
+                Surrender
               </button>
             </div>
           </form>
